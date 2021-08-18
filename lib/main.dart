@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rijks Museum',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        backgroundColor: Colors.grey.shade400,
+        primarySwatch: Colors.grey,
       ),
       onGenerateRoute: appRouter.onGenerateRoute,
     );

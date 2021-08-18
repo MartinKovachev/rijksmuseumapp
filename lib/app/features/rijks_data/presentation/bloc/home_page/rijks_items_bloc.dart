@@ -9,7 +9,7 @@ import 'package:rijksmuseumapp/app/core/const/failure_messages.dart';
 import 'package:rijksmuseumapp/app/core/errors/failures.dart';
 import 'package:rijksmuseumapp/app/core/usecases/i_usecase.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
-import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_rijks_items.dart';
+import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_next_page_rijks_items.dart';
 
 part 'rijks_items_event.dart';
 
@@ -17,7 +17,7 @@ part 'rijks_items_state.dart';
 
 @injectable
 class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
-  final GetRijksItems getRijksItems;
+  final GetNextPageRijksItems getRijksItems;
 
   RijksItemsBloc({required this.getRijksItems}) : super(Loading());
 
@@ -25,8 +25,11 @@ class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
   Stream<RijksItemsState> mapEventToState(
     RijksItemsEvent event,
   ) async* {
-    if (event is GetRijksItemsEvent) {
+    if (event is GetInitialRijksItemsEvent) {
       yield Loading();
+      final failureOrRijksItems = await getRijksItems(NoParams());
+      yield* _eitherLoadedOrErrorState(failureOrRijksItems);
+    } else if (event is GetNextPageRijksItemsEvent) {
       final failureOrRijksItems = await getRijksItems(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrRijksItems);
     }
@@ -37,7 +40,8 @@ class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
   ) async* {
     yield failureOrRijksItems.fold(
       (failure) => Error(message: _mapFailureToMessage(failure)),
-      (items) => Loaded(items: items),
+      (items) => Loaded(
+          items: state is Loaded ? (state as Loaded).items + items : items),
     );
   }
 

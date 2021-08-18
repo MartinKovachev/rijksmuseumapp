@@ -12,7 +12,7 @@ abstract class IRijksDataSource {
   /// Calls the endpoint to get all items.
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<List<RijksItemModel>> getRijksItems();
+  Future<List<RijksItemModel>> getNextPageRijksItems();
 
   /// Calls the endpoint to get specific item details.
   ///
@@ -23,11 +23,14 @@ abstract class IRijksDataSource {
 @Injectable(as: IRijksDataSource)
 class RijksDataSource implements IRijksDataSource {
   final http.Client client = http.Client();
+  int _shownPagesCount = 1;
 
   @override
-  Future<List<RijksItemModel>> getRijksItems() async {
+  Future<List<RijksItemModel>> getNextPageRijksItems() async {
+    _shownPagesCount++;
+
     final response = await client.get(
-      Uri.parse(ApiEndpoints.GET_RIJKS_ITEMS_URL),
+      Uri.parse(ApiEndpoints.GET_RIJKS_ITEMS_URL + '&p=$_shownPagesCount'),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -46,7 +49,8 @@ class RijksDataSource implements IRijksDataSource {
   @override
   Future<RijksItemDetailsModel> getRijksItemDetails(String objectNumber) async {
     final response = await client.get(
-      Uri.parse(ApiEndpoints.GET_RIJKS_ITEM_DETAILS_URL + '$objectNumber?key=${ApiEndpoints.API_KEY}'),
+      Uri.parse(ApiEndpoints.GET_RIJKS_ITEM_DETAILS_URL +
+          '$objectNumber?key=${ApiEndpoints.API_KEY}'),
       headers: {
         'Content-Type': 'application/json',
       },
