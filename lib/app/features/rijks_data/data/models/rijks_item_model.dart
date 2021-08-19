@@ -2,11 +2,13 @@ import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_ite
 
 class RijksItemModel extends RijksItem {
   const RijksItemModel({
+    required String id,
     required String objectNumber,
     required String title,
     required String? headerImageUrl,
     required String principalOrFirstMaker,
   }) : super(
+          id: id,
           objectNumber: objectNumber,
           title: title,
           headerImageUrl: headerImageUrl,
@@ -15,6 +17,7 @@ class RijksItemModel extends RijksItem {
 
   factory RijksItemModel.fromJson(Map<String, dynamic> json) {
     return RijksItemModel(
+      id: json['id'],
       objectNumber: json['objectNumber'],
       title: json['title'],
       headerImageUrl: json['headerImage']['url'],
@@ -24,6 +27,7 @@ class RijksItemModel extends RijksItem {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'objectNumber': objectNumber,
       'title': title,
       'headerImageUrl': headerImageUrl,

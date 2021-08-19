@@ -19,6 +19,7 @@ void main() {
   final listRijksItems = List<RijksItem>.generate(
     5,
     (i) => RijksItem(
+      id: '1111',
       objectNumber: '1111',
       title: 'test',
       headerImageUrl: 'test',

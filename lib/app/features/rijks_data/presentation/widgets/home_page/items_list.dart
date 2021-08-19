@@ -20,7 +20,6 @@ class ItemsList extends StatefulWidget {
 
 class _ItemsListState extends State<ItemsList> {
   final ScrollController _scrollController = ScrollController();
-  String _previousPrincipalOrFirstMaker = '';
 
   @override
   void dispose() {
@@ -37,10 +36,9 @@ class _ItemsListState extends State<ItemsList> {
         controller: _scrollController,
         itemCount: widget.items.length,
         itemBuilder: (context, index) {
-          final currentItem = widget.items[index];
           return index >= widget.items.length - 1
               ? const Loader()
-              : _isTheSamePrincipalOrFirstMakerAsPreviousItem(currentItem);
+              : _sectionHeaderWithItemCardOrItemCard(index);
         },
         separatorBuilder: (BuildContext context, int index) =>
             const SizedBox(height: 6.0),
@@ -58,18 +56,27 @@ class _ItemsListState extends State<ItemsList> {
     return false;
   }
 
-  Widget _isTheSamePrincipalOrFirstMakerAsPreviousItem(RijksItem item) {
-    if (item.principalOrFirstMaker.hashCode !=
-        _previousPrincipalOrFirstMaker.hashCode) {
-      _previousPrincipalOrFirstMaker = item.principalOrFirstMaker;
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SectionHeader(item: item),
-          ItemCard(item: item),
-        ],
-      );
+  Widget _sectionHeaderWithItemCardOrItemCard(int index) {
+    final currentItem = widget.items[index];
+    if (index == 0) {
+      return _sectionHeaderWithItemCard(currentItem);
     }
-    return ItemCard(item: item);
+
+    final previousItem = widget.items[index - 1];
+    if (currentItem.principalOrFirstMaker != previousItem.principalOrFirstMaker) {
+      return _sectionHeaderWithItemCard(currentItem);
+    }
+    return ItemCard(key: ValueKey<String>(currentItem.id), item: currentItem);
+  }
+
+  Column _sectionHeaderWithItemCard(RijksItem currentItem) {
+    return Column(
+      key: ValueKey<String>(currentItem.id),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SectionHeader(item: currentItem),
+        ItemCard(item: currentItem),
+      ],
+    );
   }
 }

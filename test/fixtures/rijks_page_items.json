@@ -1,6 +1,7 @@
 {
   "artObjects": [
     {
+      "id": "1111",
       "objectNumber": "1111",
       "title": "Test Text",
       "principalOrFirstMaker": "Rembrandt van Rijn",
@@ -9,6 +10,7 @@
       }
     },
     {
+      "id": "1112",
       "objectNumber": "1112",
       "title": "Test Text",
       "principalOrFirstMaker": "Rembrandt van Rijn",
@@ -17,6 +19,7 @@
       }
     },
     {
+      "id": "1113",
       "objectNumber": "1113",
       "title": "Test Text",
       "principalOrFirstMaker": "Rembrandt van Rijn",
@@ -25,6 +28,7 @@
       }
     },
     {
+      "id": "1114",
       "objectNumber": "1114",
       "title": "Test Text",
       "principalOrFirstMaker": "Rembrandt van Rijn",
@@ -33,6 +37,7 @@
       }
     },
     {
+      "id": "1115",
       "objectNumber": "1115",
       "title": "Test Text",
       "principalOrFirstMaker": "Rembrandt van Rijn",
@@ -41,6 +46,7 @@
       }
     },
     {
+      "id": "1116",
       "objectNumber": "1116",
       "title": "Test Text",
       "principalOrFirstMaker": "Rembrandt van Rijn",
