@@ -7,12 +7,10 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:rijksmuseumapp/app/core/const/failure_messages.dart';
 import 'package:rijksmuseumapp/app/core/errors/failures.dart';
-import 'package:rijksmuseumapp/app/core/usecases/i_usecase.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_next_page_rijks_items.dart';
 
 part 'rijks_items_event.dart';
-
 part 'rijks_items_state.dart';
 
 @injectable

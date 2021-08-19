@@ -8,12 +8,12 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case AppRoutes.HOME_PAGE:
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => const HomePage());
       case AppRoutes.DETAILS_PAGE:
-        final args = routeSettings.arguments as Map;
+        final args = routeSettings.arguments as Map?;
         return MaterialPageRoute(
           builder: (_) => DetailsPage(
-            objectNumber: args['objectNumber'],
+            objectNumber: args?['objectNumber'] as String,
           ),
         );
       default:

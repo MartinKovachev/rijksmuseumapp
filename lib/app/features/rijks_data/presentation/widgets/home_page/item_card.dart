@@ -49,7 +49,7 @@ class ItemCard extends StatelessWidget {
                           },
                         ),
                       )
-                    : Center(
+                    : const Center(
                       child: Text(
                           'No image',
                           style: TextStyle(color: Colors.white),
@@ -62,7 +62,7 @@ class ItemCard extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
                     item.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 19.0,
                       color: Colors.white,
                     ),

@@ -11,7 +11,6 @@ import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_ite
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_rijks_item_details.dart';
 
 part 'rijks_item_details_event.dart';
-
 part 'rijks_item_details_state.dart';
 
 @injectable

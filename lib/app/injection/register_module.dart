@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
@@ -5,4 +6,7 @@ import 'package:injectable/injectable.dart';
 abstract class RegisterModule {
   @lazySingleton
   http.Client get httpClient => http.Client();
+
+  @lazySingleton
+  Connectivity get connectivity => Connectivity();
 }

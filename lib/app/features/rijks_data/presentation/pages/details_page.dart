@@ -31,7 +31,7 @@ class _DetailsPageState extends State<DetailsPage> {
           extendBodyBehindAppBar: true,
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.white,
             ),
             backgroundColor: Colors.transparent,
@@ -40,7 +40,7 @@ class _DetailsPageState extends State<DetailsPage> {
           body: BlocBuilder<RijksItemDetailsBloc, RijksItemDetailsState>(
             builder: (context, state) {
               if (state is Loading) {
-                return Loader();
+                return const Loader();
               } else if (state is Loaded) {
                 return Column(
                   children: [
@@ -53,7 +53,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   child: Text(state.message),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: Text('Oops something happened'),
                 );
               }

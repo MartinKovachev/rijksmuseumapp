@@ -6,7 +6,7 @@ class RijksItemDetails extends Equatable {
   final String? description;
   final String? webImageUrl;
 
-  RijksItemDetails({
+  const RijksItemDetails({
     required this.objectNumber,
     required this.title,
     required this.description,

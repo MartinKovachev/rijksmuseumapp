@@ -36,15 +36,14 @@ class _ItemsListState extends State<ItemsList> {
         itemCount: widget.items.length,
         itemBuilder: (context, index) {
           return index >= widget.items.length - 1
-              ? Loader()
+              ? const Loader()
               : ItemCard(
                   item: widget.items[index],
                   key: ValueKey(index),
                 );
         },
-        separatorBuilder: (BuildContext context, int index) => SizedBox(
-          height: 6.0,
-        ),
+        separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(height: 6.0),
       ),
     );
   }

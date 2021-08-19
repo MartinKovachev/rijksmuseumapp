@@ -21,7 +21,7 @@ class GetNextPageRijksItems implements IUseCase<List<RijksItem>, NextPageRijksIt
 class NextPageRijksItemsParams extends Equatable {
   final int pageNumber;
 
-  NextPageRijksItemsParams({required this.pageNumber});
+  const NextPageRijksItemsParams({required this.pageNumber});
 
   @override
   List<Object?> get props => [pageNumber];

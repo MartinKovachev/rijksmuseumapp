@@ -5,7 +5,7 @@ class RijksItem extends Equatable {
   final String title;
   final String? headerImageUrl;
 
-  RijksItem({
+  const RijksItem({
     required this.objectNumber,
     required this.title,
     required this.headerImageUrl,

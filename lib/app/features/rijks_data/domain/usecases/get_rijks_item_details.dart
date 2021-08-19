@@ -23,7 +23,7 @@ class GetRijksItemDetails
 class ItemDetailsParams extends Equatable {
   final String objectNumber;
 
-  ItemDetailsParams({required this.objectNumber});
+  const ItemDetailsParams({required this.objectNumber});
 
   @override
   List<Object?> get props => [objectNumber];

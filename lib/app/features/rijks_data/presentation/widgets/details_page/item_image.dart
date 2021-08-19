@@ -15,7 +15,7 @@ class ItemImage extends StatelessWidget {
     return Container(
       height: 300,
       width: double.maxFinite,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.black,
       ),
       child: item.webImageUrl != null
@@ -30,7 +30,7 @@ class ItemImage extends StatelessWidget {
                 },
               ),
             )
-          : Center(
+          : const Center(
             child: Text(
                 'No image',
                 style: TextStyle(

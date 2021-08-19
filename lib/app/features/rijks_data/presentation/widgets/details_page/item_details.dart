@@ -19,17 +19,17 @@ class ItemDetails extends StatelessWidget {
           Container(
             width: double.maxFinite,
             padding: const EdgeInsets.all(8.0),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey),
+              ),
+            ),
             child: Text(
               item.title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
-              ),
-            ),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey),
               ),
             ),
           ),
@@ -40,7 +40,7 @@ class ItemDetails extends StatelessWidget {
               ),
               child: Text(
                 item.description ?? 'No description',
-                style: TextStyle(fontSize: 16.0),
+                style: const TextStyle(fontSize: 16.0),
               ),
             ),
           ),
