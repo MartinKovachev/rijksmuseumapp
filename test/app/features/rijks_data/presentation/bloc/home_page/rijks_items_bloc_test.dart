@@ -7,7 +7,7 @@ import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_ite
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_with_rijks_items.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/presentation/bloc/home_page/rijks_items_bloc.dart';
 
-class MockGetPageWithRijksItems extends Mock implements GetPageWithRijksItems {}
+import '../../../../../../mocks.dart';
 
 void main() {
   late RijksItemsBloc bloc;

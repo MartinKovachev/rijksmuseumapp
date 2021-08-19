@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return BlocProvider<ConnectivityCubit>(
       create: (context) => getIt<ConnectivityCubit>(),
       child: MaterialApp(
-        title: 'Rijks Museum',
         theme: ThemeData(
           backgroundColor: Colors.grey.shade400,
           primarySwatch: Colors.grey,

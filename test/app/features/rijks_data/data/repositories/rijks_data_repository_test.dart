@@ -3,14 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rijksmuseumapp/app/core/errors/exceptions.dart';
 import 'package:rijksmuseumapp/app/core/errors/failures.dart';
-import 'package:rijksmuseumapp/app/features/rijks_data/data/datasources/rijks_data_source.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/data/models/rijks_item_details_model.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/data/models/rijks_item_model.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/data/repositories/rijks_data_repository.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item_details.dart';
 
-class MockIRijksDataSource extends Mock implements IRijksDataSource {}
+import '../../../../../mocks.dart';
 
 void main() {
   late RijksDataRepository repository;

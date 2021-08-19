@@ -4,15 +4,13 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
-import 'package:rijksmuseumapp/app/core/const/api_endpoints.dart';
 import 'package:rijksmuseumapp/app/core/errors/exceptions.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/data/datasources/rijks_data_source.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/data/models/rijks_item_details_model.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/data/models/rijks_item_model.dart';
 
 import '../../../../../fixtures/fixture_reader.dart';
-
-class MockHttpClient extends Mock implements http.Client {}
+import '../../../../../mocks.dart';
 
 void main() {
   late RijksDataSource rijksDataSource;
