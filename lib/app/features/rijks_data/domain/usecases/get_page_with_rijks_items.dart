@@ -7,10 +7,10 @@ import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_ite
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/repositories/i_rijks_data_repository.dart';
 
 @injectable
-class GetNextPageRijksItems implements IUseCase<List<RijksItem>, NextPageRijksItemsParams> {
+class GetPageWithRijksItems implements IUseCase<List<RijksItem>, NextPageRijksItemsParams> {
   final IRijksDataRepository repository;
 
-  GetNextPageRijksItems({required this.repository});
+  GetPageWithRijksItems({required this.repository});
 
   @override
   Future<Either<IFailure, List<RijksItem>>> call(NextPageRijksItemsParams params) async {

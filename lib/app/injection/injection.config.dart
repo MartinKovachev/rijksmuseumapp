@@ -15,7 +15,7 @@ import '../features/rijks_data/data/repositories/rijks_data_repository.dart'
     as _i8;
 import '../features/rijks_data/domain/repositories/i_rijks_data_repository.dart'
     as _i7;
-import '../features/rijks_data/domain/usecases/get_next_page_rijks_items.dart'
+import '../features/rijks_data/domain/usecases/get_page_with_rijks_items.dart'
     as _i9;
 import '../features/rijks_data/domain/usecases/get_rijks_item_details.dart'
     as _i10;
@@ -39,14 +39,14 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i6.RijksDataSource(httpClient: get<_i3.Client>()));
   gh.factory<_i7.IRijksDataRepository>(() =>
       _i8.RijksDataRepository(rijksDataSource: get<_i6.IRijksDataSource>()));
-  gh.factory<_i9.GetNextPageRijksItems>(() =>
-      _i9.GetNextPageRijksItems(repository: get<_i7.IRijksDataRepository>()));
+  gh.factory<_i9.GetPageWithRijksItems>(() =>
+      _i9.GetPageWithRijksItems(repository: get<_i7.IRijksDataRepository>()));
   gh.factory<_i10.GetRijksItemDetails>(() =>
       _i10.GetRijksItemDetails(repository: get<_i7.IRijksDataRepository>()));
   gh.factory<_i11.RijksItemDetailsBloc>(() => _i11.RijksItemDetailsBloc(
       getRijksItemDetails: get<_i10.GetRijksItemDetails>()));
   gh.factory<_i12.RijksItemsBloc>(() =>
-      _i12.RijksItemsBloc(getRijksItems: get<_i9.GetNextPageRijksItems>()));
+      _i12.RijksItemsBloc(getRijksItems: get<_i9.GetPageWithRijksItems>()));
   return get;
 }
 

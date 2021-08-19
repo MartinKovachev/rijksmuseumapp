@@ -27,7 +27,7 @@ class RijksDataRepository implements IRijksDataRepository {
   @override
   Future<Either<IFailure, List<RijksItem>>> getRijksItems(int pageNumber) async {
     try {
-      final result = await rijksDataSource.getNextPageRijksItems(pageNumber);
+      final result = await rijksDataSource.getPageWithRijksItems(pageNumber);
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());

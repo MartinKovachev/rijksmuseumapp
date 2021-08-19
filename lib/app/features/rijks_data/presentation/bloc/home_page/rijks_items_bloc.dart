@@ -8,14 +8,15 @@ import 'package:meta/meta.dart';
 import 'package:rijksmuseumapp/app/core/const/failure_messages.dart';
 import 'package:rijksmuseumapp/app/core/errors/failures.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
-import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_next_page_rijks_items.dart';
+import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_with_rijks_items.dart';
 
 part 'rijks_items_event.dart';
+
 part 'rijks_items_state.dart';
 
 @injectable
 class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
-  final GetNextPageRijksItems getRijksItems;
+  final GetPageWithRijksItems getRijksItems;
   int _pageNumber = 0;
 
   RijksItemsBloc({required this.getRijksItems}) : super(Loading());
@@ -24,13 +25,10 @@ class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
   Stream<RijksItemsState> mapEventToState(
     RijksItemsEvent event,
   ) async* {
-    if (event is GetInitialRijksItemsEvent) {
-      yield Loading();
-      final failureOrRijksItems = await getRijksItems(NextPageRijksItemsParams(pageNumber: _pageNumber));
-      yield* _eitherLoadedOrErrorState(failureOrRijksItems);
-    } else if (event is GetNextPageRijksItemsEvent) {
+    if (event is GetNextPageRijksItemsEvent) {
       _pageNumber++;
-      final failureOrRijksItems = await getRijksItems(NextPageRijksItemsParams(pageNumber: _pageNumber));
+      final failureOrRijksItems = await getRijksItems(
+          NextPageRijksItemsParams(pageNumber: _pageNumber));
       yield* _eitherLoadedOrErrorState(failureOrRijksItems);
     }
   }

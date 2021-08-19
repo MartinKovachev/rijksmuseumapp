@@ -11,7 +11,7 @@ abstract class IRijksDataSource {
   /// Calls the endpoint to get all items.
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<List<RijksItemModel>> getNextPageRijksItems(int pageNumber);
+  Future<List<RijksItemModel>> getPageWithRijksItems(int pageNumber);
 
   /// Calls the endpoint to get specific item details.
   ///
@@ -26,7 +26,7 @@ class RijksDataSource implements IRijksDataSource {
   RijksDataSource({required this.httpClient});
 
   @override
-  Future<List<RijksItemModel>> getNextPageRijksItems(int pageNumber) async {
+  Future<List<RijksItemModel>> getPageWithRijksItems(int pageNumber) async {
     final response = await httpClient.get(
       Uri.parse('${ApiEndpoints.GET_RIJKS_ITEMS_URL}${'&p=$pageNumber'}'),
       headers: {

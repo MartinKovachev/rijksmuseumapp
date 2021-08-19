@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<RijksItemsBloc>()..add(GetInitialRijksItemsEvent()),
+      create: (_) => getIt<RijksItemsBloc>()..add(GetNextPageRijksItemsEvent()),
       child: BlocListener(
         bloc: getIt<ConnectivityCubit>(),
         listener: (context, state) {
