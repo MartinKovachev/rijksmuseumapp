@@ -4,7 +4,7 @@ class RijksItemDetailsModel extends RijksItemDetails {
   RijksItemDetailsModel({
     required String objectNumber,
     required String title,
-    required String description,
+    required String? description,
     required String? webImageUrl,
   }) : super(
     objectNumber: objectNumber,
@@ -18,7 +18,7 @@ class RijksItemDetailsModel extends RijksItemDetails {
         objectNumber: json['objectNumber'],
         title: json['title'],
         description: json['description'],
-        webImageUrl: json['webImage']['url']);
+        webImageUrl: json['webImage']?['url']);
   }
 
   Map<String, dynamic> toJson() {

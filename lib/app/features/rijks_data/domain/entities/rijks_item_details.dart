@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class RijksItemDetails extends Equatable {
   final String objectNumber;
   final String title;
-  final String description;
+  final String? description;
   final String? webImageUrl;
 
   RijksItemDetails({

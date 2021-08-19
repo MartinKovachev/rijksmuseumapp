@@ -18,9 +18,9 @@ class ItemImage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.black,
       ),
-      child: InteractiveViewer(
-        child: item.webImageUrl != null
-            ? Image.network(
+      child: item.webImageUrl != null
+          ? InteractiveViewer(
+              child: Image.network(
                 item.webImageUrl!,
                 fit: BoxFit.contain,
                 loadingBuilder: (BuildContext context, Widget child,
@@ -28,9 +28,16 @@ class ItemImage extends StatelessWidget {
                   if (loadingProgress == null) return child;
                   return Loader(loadingProgress: loadingProgress);
                 },
-              )
-            : Text('No image'),
-      ),
+              ),
+            )
+          : Center(
+            child: Text(
+                'No image',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+          ),
     );
   }
 }

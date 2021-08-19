@@ -39,7 +39,7 @@ class ItemDetails extends StatelessWidget {
                 8.0,
               ),
               child: Text(
-                item.description,
+                item.description ?? 'No description',
                 style: TextStyle(fontSize: 16.0),
               ),
             ),

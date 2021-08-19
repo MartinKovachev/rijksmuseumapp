@@ -18,6 +18,7 @@ part 'rijks_items_state.dart';
 @injectable
 class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
   final GetNextPageRijksItems getRijksItems;
+  int _pageNumber = 0;
 
   RijksItemsBloc({required this.getRijksItems}) : super(Loading());
 
@@ -27,10 +28,11 @@ class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
   ) async* {
     if (event is GetInitialRijksItemsEvent) {
       yield Loading();
-      final failureOrRijksItems = await getRijksItems(NoParams());
+      final failureOrRijksItems = await getRijksItems(NextPageRijksItemsParams(pageNumber: _pageNumber));
       yield* _eitherLoadedOrErrorState(failureOrRijksItems);
     } else if (event is GetNextPageRijksItemsEvent) {
-      final failureOrRijksItems = await getRijksItems(NoParams());
+      _pageNumber++;
+      final failureOrRijksItems = await getRijksItems(NextPageRijksItemsParams(pageNumber: _pageNumber));
       yield* _eitherLoadedOrErrorState(failureOrRijksItems);
     }
   }
