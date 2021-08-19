@@ -22,21 +22,14 @@ class _HomePageState extends State<HomePage> {
         bloc: getIt<ConnectivityCubit>(),
         listener: (context, state) {
           if (state is Connected) {
-            _showSnackbar('Connected to internet');
+            _showSnackBar('Connected to internet');
           } else if (state is Disconnected) {
-            _showSnackbar('Disconnected from internet');
+            _showSnackBar('Disconnected from internet');
           }
         },
         child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
-          appBar: AppBar(
-            elevation: 10.0,
-            title: const Text(
-              'Rijks Museum',
-              style: TextStyle(fontSize: 24.0),
-            ),
-            centerTitle: true,
-          ),
+          appBar: _buildAppBar(),
           body: BlocBuilder<RijksItemsBloc, RijksItemsState>(
             builder: (context, state) {
               if (state is Loading) {
@@ -59,7 +52,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showSnackbar(String message) {
+  AppBar _buildAppBar() {
+    return AppBar(
+          elevation: 10.0,
+          title: const Text(
+            'Rijks Museum',
+            style: TextStyle(fontSize: 24.0),
+          ),
+          centerTitle: true,
+        );
+  }
+
+  void _showSnackBar(String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
   }

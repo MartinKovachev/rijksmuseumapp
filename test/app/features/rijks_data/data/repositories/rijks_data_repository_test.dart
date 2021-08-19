@@ -28,6 +28,7 @@ void main() {
         objectNumber: '1111',
         title: 'test',
         headerImageUrl: 'test',
+        principalOrFirstMaker: 'test',
       ),
     );
     final List<RijksItem> listRijksItems = listRijksItemModels;

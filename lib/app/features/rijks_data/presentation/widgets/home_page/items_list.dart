@@ -4,6 +4,7 @@ import 'package:rijksmuseumapp/app/core/shared_widgets/loader.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/presentation/bloc/home_page/rijks_items_bloc.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/presentation/widgets/home_page/item_card.dart';
+import 'package:rijksmuseumapp/app/features/rijks_data/presentation/widgets/home_page/section_header.dart';
 
 class ItemsList extends StatefulWidget {
   final List<RijksItem> items;
@@ -19,6 +20,7 @@ class ItemsList extends StatefulWidget {
 
 class _ItemsListState extends State<ItemsList> {
   final ScrollController _scrollController = ScrollController();
+  String _previousPrincipalOrFirstMaker = '';
 
   @override
   void dispose() {
@@ -35,12 +37,10 @@ class _ItemsListState extends State<ItemsList> {
         controller: _scrollController,
         itemCount: widget.items.length,
         itemBuilder: (context, index) {
+          final currentItem = widget.items[index];
           return index >= widget.items.length - 1
               ? const Loader()
-              : ItemCard(
-                  item: widget.items[index],
-                  key: ValueKey(index),
-                );
+              : _isTheSamePrincipalOrFirstMakerAsPreviousItem(currentItem);
         },
         separatorBuilder: (BuildContext context, int index) =>
             const SizedBox(height: 6.0),
@@ -56,5 +56,20 @@ class _ItemsListState extends State<ItemsList> {
     }
 
     return false;
+  }
+
+  Widget _isTheSamePrincipalOrFirstMakerAsPreviousItem(RijksItem item) {
+    if (item.principalOrFirstMaker.hashCode !=
+        _previousPrincipalOrFirstMaker.hashCode) {
+      _previousPrincipalOrFirstMaker = item.principalOrFirstMaker;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SectionHeader(item: item),
+          ItemCard(item: item),
+        ],
+      );
+    }
+    return ItemCard(item: item);
   }
 }

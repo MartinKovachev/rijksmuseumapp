@@ -5,10 +5,12 @@ class RijksItemModel extends RijksItem {
     required String objectNumber,
     required String title,
     required String? headerImageUrl,
+    required String principalOrFirstMaker,
   }) : super(
           objectNumber: objectNumber,
           title: title,
           headerImageUrl: headerImageUrl,
+          principalOrFirstMaker: principalOrFirstMaker,
         );
 
   factory RijksItemModel.fromJson(Map<String, dynamic> json) {
@@ -16,6 +18,7 @@ class RijksItemModel extends RijksItem {
       objectNumber: json['objectNumber'],
       title: json['title'],
       headerImageUrl: json['headerImage']['url'],
+      principalOrFirstMaker: json['principalOrFirstMaker'],
     );
   }
 
@@ -24,6 +27,7 @@ class RijksItemModel extends RijksItem {
       'objectNumber': objectNumber,
       'title': title,
       'headerImageUrl': headerImageUrl,
+      'principalOrFirstMaker': principalOrFirstMaker,
     };
   }
 }

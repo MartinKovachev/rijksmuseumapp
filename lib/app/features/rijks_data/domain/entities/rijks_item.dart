@@ -4,11 +4,13 @@ class RijksItem extends Equatable {
   final String objectNumber;
   final String title;
   final String? headerImageUrl;
+  final String principalOrFirstMaker;
 
   const RijksItem({
     required this.objectNumber,
     required this.title,
     required this.headerImageUrl,
+    required this.principalOrFirstMaker,
   });
 
   @override
@@ -16,5 +18,6 @@ class RijksItem extends Equatable {
         objectNumber,
         title,
         headerImageUrl,
+        principalOrFirstMaker,
       ];
 }
