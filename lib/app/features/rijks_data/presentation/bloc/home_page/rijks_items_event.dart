@@ -6,4 +6,4 @@ abstract class RijksItemsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetNextPageRijksItemsEvent extends RijksItemsEvent {}
+class GetPageRijksItemsEvent extends RijksItemsEvent {}

@@ -2,17 +2,17 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
-import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_with_rijks_items.dart';
+import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_rijks_items.dart';
 
 import '../../../../../mocks.dart';
 
 void main() {
-  late GetPageWithRijksItems usecase;
+  late GetPageRijksItems usecase;
   late MockIRijksDataRepository mockIRijksDataRepository;
 
   setUp(() {
     mockIRijksDataRepository = MockIRijksDataRepository();
-    usecase = GetPageWithRijksItems(repository: mockIRijksDataRepository);
+    usecase = GetPageRijksItems(repository: mockIRijksDataRepository);
   });
 
   final pageNumber = 1;
@@ -36,7 +36,7 @@ void main() {
 
     // act
     final result =
-        await usecase(NextPageRijksItemsParams(pageNumber: pageNumber));
+        await usecase(PageRijksItemsParams(pageNumber: pageNumber));
 
     // assert
     expect(result, Right(listRijksItems));

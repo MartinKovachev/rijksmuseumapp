@@ -11,6 +11,7 @@ import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_ite
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_rijks_item_details.dart';
 
 part 'rijks_item_details_event.dart';
+
 part 'rijks_item_details_state.dart';
 
 @injectable
@@ -46,10 +47,12 @@ class RijksItemDetailsBloc
 
   String _mapFailureToMessage(IFailure failure) {
     switch (failure.runtimeType) {
+      case NetworkFailure:
+        return FailureMessages.NETWORK_FAILURE_MESSAGE;
       case ServerFailure:
         return FailureMessages.SERVER_FAILURE_MESSAGE;
       default:
-        return 'Unexpected error';
+        return FailureMessages.UNDEFINED_FAILURE_MESSAGE;
     }
   }
 }

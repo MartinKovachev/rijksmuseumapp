@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rijksmuseumapp/app/core/errors/exceptions.dart';
@@ -19,18 +21,27 @@ class RijksDataRepository implements IRijksDataRepository {
     try {
       final result = await rijksDataSource.getRijksItemDetails(objectNumber);
       return Right(result);
+    } on SocketException {
+      return Left(NetworkFailure());
     } on ServerException {
       return Left(ServerFailure());
+    } catch (e) {
+      return Left(UndefinedFailure());
     }
   }
 
   @override
-  Future<Either<IFailure, List<RijksItem>>> getRijksItems(int pageNumber) async {
+  Future<Either<IFailure, List<RijksItem>>> getRijksItems(
+      int pageNumber) async {
     try {
       final result = await rijksDataSource.getPageWithRijksItems(pageNumber);
       return Right(result);
+    } on SocketException {
+      return Left(NetworkFailure());
     } on ServerException {
       return Left(ServerFailure());
+    } catch (e) {
+      return Left(UndefinedFailure());
     }
   }
 }

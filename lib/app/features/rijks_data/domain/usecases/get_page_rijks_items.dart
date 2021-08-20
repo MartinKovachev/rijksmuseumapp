@@ -7,21 +7,21 @@ import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_ite
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/repositories/i_rijks_data_repository.dart';
 
 @injectable
-class GetPageWithRijksItems implements IUseCase<List<RijksItem>, NextPageRijksItemsParams> {
+class GetPageRijksItems implements IUseCase<List<RijksItem>, PageRijksItemsParams> {
   final IRijksDataRepository repository;
 
-  GetPageWithRijksItems({required this.repository});
+  GetPageRijksItems({required this.repository});
 
   @override
-  Future<Either<IFailure, List<RijksItem>>> call(NextPageRijksItemsParams params) async {
+  Future<Either<IFailure, List<RijksItem>>> call(PageRijksItemsParams params) async {
     return await repository.getRijksItems(params.pageNumber);
   }
 }
 
-class NextPageRijksItemsParams extends Equatable {
+class PageRijksItemsParams extends Equatable {
   final int pageNumber;
 
-  const NextPageRijksItemsParams({required this.pageNumber});
+  const PageRijksItemsParams({required this.pageNumber});
 
   @override
   List<Object?> get props => [pageNumber];

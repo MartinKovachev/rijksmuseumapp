@@ -50,7 +50,7 @@ class _ItemsListState extends State<ItemsList> {
     if (notification is ScrollEndNotification &&
         _scrollController.position.extentAfter == 0) {
       BlocProvider.of<RijksItemsBloc>(context)
-          .add(GetNextPageRijksItemsEvent());
+          .add(GetPageRijksItemsEvent());
     }
 
     return false;

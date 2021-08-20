@@ -8,15 +8,15 @@ import 'package:meta/meta.dart';
 import 'package:rijksmuseumapp/app/core/const/failure_messages.dart';
 import 'package:rijksmuseumapp/app/core/errors/failures.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
-import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_with_rijks_items.dart';
+import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_rijks_items.dart';
 
 part 'rijks_items_event.dart';
+
 part 'rijks_items_state.dart';
 
 @injectable
 class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
-  final GetPageWithRijksItems getRijksItems;
-  int _pageNumber = 0;
+  final GetPageRijksItems getRijksItems;
 
   RijksItemsBloc({required this.getRijksItems}) : super(Loading());
 
@@ -24,10 +24,9 @@ class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
   Stream<RijksItemsState> mapEventToState(
     RijksItemsEvent event,
   ) async* {
-    if (event is GetNextPageRijksItemsEvent) {
-      _pageNumber++;
+    if (event is GetPageRijksItemsEvent) {
       final failureOrRijksItems = await getRijksItems(
-          NextPageRijksItemsParams(pageNumber: _pageNumber));
+          PageRijksItemsParams(pageNumber: state.pageNumber));
       yield* _eitherLoadedOrErrorState(failureOrRijksItems);
     }
   }
@@ -37,17 +36,22 @@ class RijksItemsBloc extends Bloc<RijksItemsEvent, RijksItemsState> {
   ) async* {
     yield failureOrRijksItems.fold(
       (failure) => Error(message: _mapFailureToMessage(failure)),
-      (items) => Loaded(
-          items: state is Loaded ? (state as Loaded).items + items : items),
+      (items) {
+        return Loaded(
+            pageNumber: state.pageNumber + 1,
+            items: state is Loaded ? (state as Loaded).items + items : items);
+      },
     );
   }
 
   String _mapFailureToMessage(IFailure failure) {
     switch (failure.runtimeType) {
+      case NetworkFailure:
+        return FailureMessages.NETWORK_FAILURE_MESSAGE;
       case ServerFailure:
         return FailureMessages.SERVER_FAILURE_MESSAGE;
       default:
-        return 'Unexpected error';
+        return FailureMessages.UNDEFINED_FAILURE_MESSAGE;
     }
   }
 }

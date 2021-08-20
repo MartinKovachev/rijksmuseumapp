@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:rijksmuseumapp/app/core/const/failure_messages.dart';
 import 'package:rijksmuseumapp/app/core/errors/failures.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/domain/entities/rijks_item.dart';
-import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_with_rijks_items.dart';
+import 'package:rijksmuseumapp/app/features/rijks_data/domain/usecases/get_page_rijks_items.dart';
 import 'package:rijksmuseumapp/app/features/rijks_data/presentation/bloc/home_page/rijks_items_bloc.dart';
 
 import '../../../../../../mocks.dart';
@@ -14,8 +14,8 @@ void main() {
   late MockGetPageWithRijksItems mockGetPageWithRijksItems;
 
   setUpAll(() {
-    registerFallbackValue<NextPageRijksItemsParams>(
-        NextPageRijksItemsParams(pageNumber: 1));
+    registerFallbackValue<PageRijksItemsParams>(
+        PageRijksItemsParams(pageNumber: 1));
   });
 
   setUp(() {
@@ -45,20 +45,20 @@ void main() {
     );
 
     test(
-      'should emit Loaded state when GetNextPageRijksItemsEvent is added and data is gotten successfully',
+      'should emit Loaded state when GetPageRijksItemsEvent is added and data is gotten successfully',
       () async {
         // arrange
         when(() => mockGetPageWithRijksItems(any()))
             .thenAnswer((_) async => Right(items));
         // assert later
-        expectLater(bloc.stream, emits(Loaded(items: items)));
+        expectLater(bloc.stream, emits(Loaded(pageNumber: 1, items: items)));
         // act
-        bloc.add(GetNextPageRijksItemsEvent());
+        bloc.add(GetPageRijksItemsEvent());
       },
     );
 
     test(
-      'should emit Error state when GetNextPageRijksItemsEvent is added and there is a ServerFailure',
+      'should emit Error state when GetPageRijksItemsEvent is added and there is a ServerFailure',
       () async {
         // arrange
         when(() => mockGetPageWithRijksItems(any()))
@@ -67,7 +67,7 @@ void main() {
         expectLater(bloc.stream,
             emits(Error(message: FailureMessages.SERVER_FAILURE_MESSAGE)));
         // act
-        bloc.add(GetNextPageRijksItemsEvent());
+        bloc.add(GetPageRijksItemsEvent());
       },
     );
   });
